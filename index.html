@@ -3,7 +3,20 @@
 <head>
 	<meta charset="UTF-8" />
 
-	<title>Phaser Basic Project Template</title>
+	<title>Let's Play: Ancient Greek Punishment: CPU Edition</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+	<script>
+	WebFont.load({
+		custom: {
+			families: ['commodore_64_pixelizedregular'],
+			urls: ['css/stylesheet.css']
+		}
+	});
+	</script>
+
+	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
+
 	<script src="js/phaser/phaser.min.js"></script>
 
 	<script src="js/Boot.js"></script>
@@ -13,29 +26,29 @@
 </head>
 <body>
 
-<div id="gameContainer"></div>
+	<div id="gameContainer"></div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 
-window.onload = function() {
+	window.onload = function() {
 
-	//	Create your Phaser game and inject it into the gameContainer div.
-	//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
-	var game = new Phaser.Game(800, 400, Phaser.AUTO, 'gameContainer', null, false, false);
+		//	Create your Phaser game and inject it into the gameContainer div.
+		//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
+		var game = new Phaser.Game(800, 400, Phaser.AUTO, 'gameContainer', null, false, false);
 
-	//	Add the States your game has.
-	//	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
-	game.state.add('Boot', BasicGame.Boot);
-	game.state.add('Preloader', BasicGame.Preloader);
-	game.state.add('Menu', BasicGame.Menu);
-	game.state.add('Prometheus', BasicGame.Prometheus);
+		//	Add the States your game has.
+		//	You don't have to do this in the html, it could be done in your Boot state too, but for simplicity I'll keep it here.
+		game.state.add('Boot', BasicGame.Boot);
+		game.state.add('Preloader', BasicGame.Preloader);
+		game.state.add('Menu', BasicGame.Menu);
+		game.state.add('Prometheus', BasicGame.Prometheus);
 
-	//	Now start the Boot state.
-	game.state.start('Boot');
+		//	Now start the Boot state.
+		game.state.start('Boot');
 
-};
+	};
 
-</script>
+	</script>
 
 </body>
 </html>
