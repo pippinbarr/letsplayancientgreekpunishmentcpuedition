@@ -44,7 +44,7 @@ BasicGame.Prometheus.prototype = {
   dayDuration: 10,
 
   LIVER_DAMAGE: 5,
-  liver: 5,
+  liver: 100,
   days: 0,
 
   peckSFX: null,
@@ -70,25 +70,25 @@ BasicGame.Prometheus.prototype = {
 
     // BG
     this.bg = this.add.sprite(0,0,'atlas');
-    this.bg.animations.add('daytime',Phaser.Animation.generateFrameNames('prometheus/bg_', 1, 1, '.png'), 5, true);
-    this.bg.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/bg_', 2, 2, '.png'), 5, true);
+    this.bg.animations.add('daytime',Phaser.Animation.generateFrameNames('prometheus/bg_', 1, 1, '.png'), 5, false);
+    this.bg.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/bg_', 2, 2, '.png'), 5, false);
     scale(this.bg,400);
 
     this.bg.animations.play('daytime');
 
     // PROMETHEUS
     this.prometheus = this.add.sprite(360,220,'atlas');
-    this.prometheus.animations.add('idle',Phaser.Animation.generateFrameNames('prometheus/prometheus_', 1, 1, '.png'), 5, true);
-    this.prometheus.animations.add('struggle',Phaser.Animation.generateFrameNames('prometheus/prometheus_', 1, 2, '.png'), 5, true);
-    this.prometheus.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/prometheus_', 3, 3, '.png'), 5, true);
+    this.prometheus.animations.add('idle',Phaser.Animation.generateFrameNames('prometheus/prometheus_', 1, 1, '.png'), 5, false);
+    this.prometheus.animations.add('struggle',this.getAnimationArray('prometheus/prometheus_',[2,1]), 5, false);
+    this.prometheus.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/prometheus_', 3, 3, '.png'), 5, false);
     scale(this.prometheus,4);
 
     this.prometheus.animations.play('idle');
 
     // ROCK (AND CHAINS)
     this.rock = this.add.sprite(0,0,'atlas');
-    this.rock.animations.add('daytime',Phaser.Animation.generateFrameNames('prometheus/rock_', 1, 1, '.png'), 5, true);
-    this.rock.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/rock_', 2, 2, '.png'), 5, true);
+    this.rock.animations.add('daytime',Phaser.Animation.generateFrameNames('prometheus/rock_', 1, 1, '.png'), 5, false);
+    this.rock.animations.add('nighttime',Phaser.Animation.generateFrameNames('prometheus/rock_', 2, 2, '.png'), 5, false);
     scale(this.rock,4);
 
     this.rock.animations.play('daytime');
@@ -96,7 +96,7 @@ BasicGame.Prometheus.prototype = {
     // EAGLE
     this.eagle = this.add.sprite(22*SCALE,-20*SCALE,'atlas');
     this.eagle.animations.add('flying',Phaser.Animation.generateFrameNames('prometheus/eagle_', 1, 4, '.png'), 5, true);
-    this.eagle.animations.add('perched',Phaser.Animation.generateFrameNames('prometheus/eagle_', 5, 5, '.png'), 5, true);
+    this.eagle.animations.add('perched',Phaser.Animation.generateFrameNames('prometheus/eagle_', 5, 5, '.png'), 5, false);
     this.eagle.animations.add('peck',this.getAnimationArray('prometheus/eagle_', [6]), 10, false);
     scale(this.eagle,4);
 
@@ -110,7 +110,7 @@ BasicGame.Prometheus.prototype = {
     // TEXTS
 
     // INSTRUCTIONS
-    var instructionsString = "RAPIDLY " + INPUT_WORD + " TO WRITHE IN PAIN AND DISLODGE THE EAGLE!";
+    var instructionsString = "RAPIDLY CALL THE STRUGGLE() FUNCTION TO WRITHE IN PAIN AND DISLODGE THE EAGLE!";
     var instructionsStyle = { font: 24 + "px commodore_64_pixelizedregular", fill: "#000000", lineHeight: 2, wordWrap: true, wordWrapWidth: this.game.width - 400, align: "center"};
     this.instructionsText = this.game.add.text(this.game.width/2, 20*4, instructionsString, instructionsStyle);
     this.instructionsText.lineSpacing = -8;
@@ -129,12 +129,26 @@ BasicGame.Prometheus.prototype = {
       this.eagle.state = this.EAGLE_STATE.ARRIVING;
     }, this);
 
+    this.downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+    context = this;
+    setInterval(function () {
+      function simulateClick() {
+        // var press = $.Event("keypress");
+        // press.ctrlKey = false;
+        // press.which = 40;
+        // $("canvas").trigger(press);
+        // console.log("press.")
+        context.struggle();
+      }
+      simulateClick();
+    },1000);
+
   },
 
   update: function () {
     this.handleEagle();
     this.handleDayNight();
-    // this.handlePrometheus();
+    this.handleInput();
   },
 
 
@@ -289,7 +303,25 @@ BasicGame.Prometheus.prototype = {
     }
   },
 
+  handleInput: function () {
+    // ha ha
+  },
 
+  struggle: function () {
+
+    if (this.liver == 0) return;
+
+    this.showInstructions = false;
+
+    this.prometheus.animations.play("struggle");
+    if (this.eagle.state == this.EAGLE_STATE.PERCHED) {
+      this.eagle.state = this.EAGLE_STATE.FLAP_UP;
+      this.eagle.animations.play('flying');
+      if (this.peckEvent) {
+        this.game.time.events.remove(this.peckEvent);
+      }
+    }
+  },
 
   moveEagle: function (xFactor, yFactor) {
     this.eagle.x += xFactor*0.3*SCALE;
