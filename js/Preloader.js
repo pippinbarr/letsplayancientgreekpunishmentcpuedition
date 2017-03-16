@@ -54,7 +54,7 @@ BasicGame.Preloader.prototype = {
 		if (this.ready == false)
 		{
 			this.ready = true;
-			this.state.start('Game');
+			this.state.start('Prometheus');
 		}
 
 	}
