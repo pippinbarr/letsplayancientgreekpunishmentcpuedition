@@ -22,15 +22,10 @@ BasicGame.Preloader.prototype = {
 		//	as the files below are loaded in.
 		// this.load.setPreloadSprite(this.preloadBar);
 
-		// this.load.spritesheet('prometheus', 'assets/sprites/prometheus/prometheus.png', 21, 10);
-		// this.load.spritesheet('eagle', 'assets/sprites/prometheus/eagle.png', 12, 11);
-		// this.load.spritesheet('rock', 'assets/sprites/prometheus/rockandchains.png',200,100);
-		// this.load.spritesheet('bg', 'assets/sprites/prometheus/bg.png',2,1);
 
-		// this.game.load.json('sprites', 'assets/atlas/atlas.json');
-		// this.load.atlasJSONHash('atlas','assets/atlas/atlas.png',"assets/atlas.json",null);
-
-this.game.load.atlas('atlas', 'assets/atlas/assets.png', 'assets/atlas/assets.json');
+		this.game.load.atlas('atlas', 'assets/atlas/assets.png', 'assets/atlas/assets.json');
+		this.game.load.audio('peckSFX', 'assets/sounds/peck.mp3');
+		this.game.load.audio('swoopdownSFX', 'assets/sounds/swoopdown.mp3');
 	},
 
 	create: function () {
@@ -41,8 +36,7 @@ this.game.load.atlas('atlas', 'assets/atlas/assets.png', 'assets/atlas/assets.js
 
 	update: function () {
 
-		// if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
-		if (this.ready == false)
+		if (this.cache.isSoundDecoded('peckSFX') && this.ready == false)
 		{
 			this.ready = true;
 			this.state.start('Prometheus');
