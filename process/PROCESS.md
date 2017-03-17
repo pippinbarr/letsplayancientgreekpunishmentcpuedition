@@ -1,3 +1,10 @@
+# Things to do
+
+* Make Danaids
+* Read Jesper Juul's [Zero-Player Games](https://www.jesperjuul.net/text/zeroplayergames/) because you ought to
+
+* ~~Mock-up a screenshot with a CPU player indicator on it~~
+* ~~Casually make the Prometheus version of the game~~
 
 ### How does the CPU play the game? (2017-03-16 15:36)
 
