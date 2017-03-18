@@ -23,12 +23,18 @@
 	<script src="js/Preloader.js"></script>
 	<script src="js/Menu.js"></script>
 	<script src="js/Prometheus.js"></script>
+	<script src="js/Danaids.js"></script>
 </head>
 <body>
 
 	<div id="gameContainer"></div>
 
 	<script type="text/javascript">
+
+	const FONT_SIZE_BIG = 32;
+	const FONT_SIZE_SMALL = 24;
+	const FONT_SIZE_EXTRA_SMALL = 18;
+	const SCALE = 4;
 
 	window.onload = function() {
 
@@ -42,6 +48,7 @@
 		game.state.add('Preloader', BasicGame.Preloader);
 		game.state.add('Menu', BasicGame.Menu);
 		game.state.add('Prometheus', BasicGame.Prometheus);
+		game.state.add('Danaids', BasicGame.Danaids);
 
 		//	Now start the Boot state.
 		game.state.start('Boot');

@@ -1,10 +1,3 @@
-const FONT_SIZE_BIG = 32;
-const FONT_SIZE_SMALL = 23;
-const FONT_SIZE_EXTRA_SMALL = 18;
-const SCALE = 4;
-var INPUT_WORD;
-
-
 BasicGame.Prometheus = function (game) {
 
 };
@@ -54,14 +47,6 @@ BasicGame.Prometheus.prototype = {
 
 
   create: function () {
-
-    // Set up input description based on platform
-    if (this.game.device.desktop) {
-      INPUT_WORD = "ALTERNATE THE 'G' AND 'H' KEYS"
-    }
-    else {
-      INPUT_WORD = "TAP"
-    }
 
     this.dayState = this.DAY_STATE.DAY;
 
@@ -129,18 +114,12 @@ BasicGame.Prometheus.prototype = {
       this.eagle.state = this.EAGLE_STATE.ARRIVING;
     }, this);
 
-    this.downKey = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
+
+    // CPU PLAYER
+
     context = this;
     setInterval(function () {
-      function simulateClick() {
-        // var press = $.Event("keypress");
-        // press.ctrlKey = false;
-        // press.which = 40;
-        // $("canvas").trigger(press);
-        // console.log("press.")
-        context.struggle();
-      }
-      simulateClick();
+      context.struggle();
     },1000);
 
   },

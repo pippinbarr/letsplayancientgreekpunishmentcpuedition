@@ -26,6 +26,7 @@ BasicGame.Preloader.prototype = {
 		this.game.load.atlas('atlas', 'assets/atlas/assets.png', 'assets/atlas/assets.json');
 		this.game.load.audio('peckSFX', 'assets/sounds/peck.mp3');
 		this.game.load.audio('swoopdownSFX', 'assets/sounds/swoopdown.mp3');
+		this.game.load.audio('swoopupSFX', 'assets/sounds/swoopup.mp3');
 	},
 
 	create: function () {
@@ -39,7 +40,7 @@ BasicGame.Preloader.prototype = {
 		if (this.cache.isSoundDecoded('peckSFX') && this.ready == false)
 		{
 			this.ready = true;
-			this.state.start('Prometheus');
+			this.state.start('Danaids');
 		}
 
 	}
