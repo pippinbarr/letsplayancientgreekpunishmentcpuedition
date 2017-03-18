@@ -95,7 +95,7 @@ BasicGame.Prometheus.prototype = {
     // TEXTS
 
     // INSTRUCTIONS
-    var instructionsString = "RAPIDLY CALL THE STRUGGLE() FUNCTION TO WRITHE IN PAIN AND DISLODGE THE EAGLE!";
+    var instructionsString = "RAPIDLY CALL THE INPUT() FUNCTION TO WRITHE IN PAIN AND DISLODGE THE EAGLE!";
     var instructionsStyle = { font: 24 + "px commodore_64_pixelizedregular", fill: "#000000", lineHeight: 2, wordWrap: true, wordWrapWidth: this.game.width - 400, align: "center"};
     this.instructionsText = this.game.add.text(this.game.width/2, 20*4, instructionsString, instructionsStyle);
     this.instructionsText.lineSpacing = -8;
@@ -119,7 +119,7 @@ BasicGame.Prometheus.prototype = {
 
     context = this;
     setInterval(function () {
-      context.struggle();
+      context.INPUT();
     },1000);
 
   },
@@ -286,7 +286,7 @@ BasicGame.Prometheus.prototype = {
     // ha ha
   },
 
-  struggle: function () {
+  INPUT: function () {
 
     if (this.liver == 0) return;
 
