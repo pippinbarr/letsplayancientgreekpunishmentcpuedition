@@ -1,10 +1,21 @@
 # Things to do
 
-* Make Danaids
-* Read Jesper Juul's [Zero-Player Games](https://www.jesperjuul.net/text/zeroplayergames/) because you ought to
+* Add menu screen with CPU selection
+* Add 'CPU' indicator (in highlight colour) to levels
+* Make Sisyphus
+* Make Tantalus
 
+* ~~Make Zeno~~
+* ~~Make Danaids~~
+* ~~Read Jesper Juul's [Zero-Player Games](https://www.jesperjuul.net/text/zeroplayergames/) because you ought to~~
 * ~~Mock-up a screenshot with a CPU player indicator on it~~
 * ~~Casually make the Prometheus version of the game~~
+
+### Dear Diary (2017-03-20 16:06)
+
+Just reporting in. I've now got Danaids and Zeno working fine. I've done both by essentially cutting and pasting in the ActionScript and translating from Flixel/AS to Phaser/JS, which has been remarkable easy, thank god. Bodes kind of well for potentially porting a bunch of my other work at some point I think. The underlying structures do 'just work' and nothing I ever do is really complex enough to worry about too much. So that's a plus, and makes me feel less like my games are being lost in the mists of time? Though of course just changing to ActionScript doesn't exactly guarantee longevity?
+
+Anyway things are working. By the end of the week I'd expect the game will be completely done. And v r 3 will also be tidied away with its press kit and everything. I guess my aim will be to contact press on Thursday or Friday for a Wednesday release next week.
 
 ### How does the CPU play the game? (2017-03-16 15:36)
 
@@ -51,7 +62,7 @@ What to call the new one:
 #### LEADER
 **Let's Play: Ancient Greek Punishment: CPU Edition**
 
-(CPU is the leading term for a computer opponent according to Twitter. I'm also drawn to it as a direct commentary on the inner workings of a computer.)
+(CPU is the leading term for a computer opponent according to Twitter. I'm also drawn to it as a direct reference on the inner workings of a computer.)
 
 #### ALSO
 * Let's Play: Ancient Greek Punishment: Zero
