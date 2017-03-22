@@ -40,7 +40,7 @@ BasicGame.Preloader.prototype = {
 		if (this.cache.isSoundDecoded('peckSFX') && this.ready == false)
 		{
 			this.ready = true;
-			this.state.start('Zeno');
+			this.state.start('Sisyphus');
 		}
 
 	}
