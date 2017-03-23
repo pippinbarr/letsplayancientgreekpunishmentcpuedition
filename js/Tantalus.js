@@ -14,17 +14,19 @@ BasicGame.Tantalus.prototype = {
 
   STATE: {
     IDLE: 'IDLE',
-		REACHING: 'REACHING',
-		REACHLOOP: 'REACHLOOP',
-		UNREACHING: 'UNREACHING',
-		STOOPING: 'STOOPING',
-		STOOPLOOP: 'STOOPLOOP',
-		UNSTOOPING: 'UNSTOOPING',
+    REACHING: 'REACHING',
+    REACHLOOP: 'REACHLOOP',
+    UNREACHING: 'UNREACHING',
+    STOOPING: 'STOOPING',
+    STOOPLOOP: 'STOOPLOOP',
+    UNSTOOPING: 'UNSTOOPING',
   },
 
   fruits: 0,
   waters: 0,
   state: undefined,
+  input: 0,
+  inputChoice: 0,
   activated: false,
   timeSinceActived: 10000,
   MAX_ACTIVATED_DELAY: 120,
@@ -52,8 +54,8 @@ BasicGame.Tantalus.prototype = {
 
 
     // SFX
-    this.failureSFX = this.game.add.audio('peckSFX');
-    this.downhillSFX = this.game.add.audio('swoopdownSFX');
+    this.failureSFX = this.game.add.audio('swoopdownSFX');
+    this.attemptSFX = this.game.add.audio('swoopupSFX');
 
 
     // TEXTS
@@ -80,160 +82,238 @@ BasicGame.Tantalus.prototype = {
     this.updateTexts();
 
 
-    // CPU PLAYER
 
     context = this;
+    this.inputChoice = (Math.random() > 0.5 ? 1 : 2);
     setInterval(function () {
-      context.INPUT1();
+      if (context.inputChoice == 1) {
+        context.INPUT1();
+      }
+      else {
+        context.INPUT2();
+      }
     },100);
 
     // this.input.onDown.add(this.onDown,this);
 
   },
 
-  onDown: function () {
-    this.INPUT();
+  onDown: function (e) {
+    if (e.y > this.game.canvas.height/2) {
+      // console.log("low");
+      this.INPUT2();
+    }
+    else {
+      // console.log("high");
+      this.INPUT1();
+    }
   },
 
   update: function () {
 
-    return;
-    var frameAtStartOfUpdate = this.getCurrentFrameNumber();
-    console.log(this.getCurrentFrameNumber());
-
     this.timeSinceActived += this.time.elapsed;
 
-    if (this.state == this.STATE.START && this.sisyphus.animations.currentAnim.isFinished) {
-      console.log("START > BOTTOM");
-      this.state = this.STATE.BOTTOM;
-      this.sisyphus.animations.play("uphill");
-    }
-    else if (this.state == this.STATE.DOWNHILL && this.sisyphus.animations.currentAnim.isFinished) {
-      console.log("DOWNHILL > BOTTOM");
-      // trace("DOWNHILL AND FINISHED");
-      this.state = this.STATE.BOTTOM;
-    }
-    else if (this.state == this.STATE.UPHILL && this.sisyphus.animations.currentAnim.isFinished) {
-      console.log("UPHILL > REVERT");
-      this.state = this.STATE.REVERT;
-      this.downhillSFX.play();
-      this.sisyphus.animations.play("fastdownhill");
-    }
-    else if (this.state == this.STATE.REVERT && this.sisyphus.animations.currentAnim.isFinished) {
-      console.log("REVERT > BOTTOM");
-      this.state = this.STATE.BOTTOM;
-      this.failures++;
-      this.failureSFX.play();
-      this.updateTexts();
-      if (this.instructionsText.visible) {
-        this.instructionsText.visible = false;
-      }
-    }
-
-    if (this.activated) {
-      if (this.state == this.STATE.PRESTART) {
-        this.state = this.STATE.START;
-        // this.sisyphus.play('start');
-        // this.sisyphus.animations.currentAnim.paused = false;
-        this.sisyphus.animations.play('start');
-        // var currentFrame = this.getCurrentFrameNumber();
-        console.log("ACTIVATED: PRESTART > START");
-      }
-      else if (this.state == this.STATE.START) {
-        console.log("ACTIVATED: START");
-        // this.sisyphus.animations.currentAnim.paused = false;
-        if (this.sisyphus.animations.paused) {
-          this.sisyphus.animations.paused = false;
-        }
-        // this.sisyphus.animations.play('start');
-
-        // trace("START AND KEYS");
-        // var currentFrame = this.getCurrentFrameNumber();
-        // currentFrame -= (this.SISYPHUS_START_FRAMES.length-1);
-        // console.log("START and frame is " + currentFrame);
-        // if (currentFrame == this.SISYPHUS_START_FRAMES.length - 1) currentFrame--;
-        // this.sisyphus.animations.play('start');
-        // this.sisyphus.animations.currentAnim.setFrame(currentFrame+1,true);
-      }
-      else if (this.state == this.STATE.UPHILL) {
-        // trace("UPHILL AND KEYS");
-      }
-      else if (this.state == this.STATE.BOTTOM) {
-        // trace("BOTTOM AND KEYS");
-        console.log("ACTIVATED: BOTTOM > UPHILL");
-        this.state = this.STATE.UPHILL;
-        this.sisyphus.animations.play("uphill");
-      }
-      else if (this.state == this.STATE.DOWNHILL) {
-        console.log("ACTIVATED: DOWNHILL > UPHILL");
-        // trace("DOWNHILL AND KEYS");
-        this.state = this.STATE.UPHILL;
-        var frame = this.convertDownhillToUphill(this.getCurrentFrameNumber());
-        this.sisyphus.animations.play('uphill');
-        this.sisyphus.animations.currentAnim.setFrame(frame,true);
-      }
-    }
-    else {
-      if (this.state == this.STATE.START) {
-        // trace("START AND NO KEYS");
-        // this.sisyphus.frame = _currentFrame;
-        this.sisyphus.animations.paused = true;
-        // this.sisyphus.animations.stop(false,false);
-        console.log("NOT ACTIVATED: START > STOP")
-      }
-      else if (this.state == this.STATE.UPHILL) {
-        console.log("NOT ACTIVATED: UPHILL > DOWNHILL");
-        this.state = this.STATE.DOWNHILL;
-        var frame = this.convertUphillToDownhill(this.getCurrentFrameNumber());
-        this.sisyphus.animations.play('downhill');
-        this.sisyphus.animations.currentAnim.setFrame(frame,true);
-      }
-    }
+    this.handleSFX();
+    this.handleAnimationTransitions();
+    this.handleInputAnimations();
 
     if (this.timeSinceActived > this.MAX_ACTIVATED_DELAY) {
       this.activated = false;
+      this.input = 0;
     }
   },
 
-  convertUphillToDownhill: function(f) {
-    // return this.SISYPHUS_DOWNHILL_FRAMES.indexOf(f);
-
-    console.log("uphill>downhill converting " + f);
-    var result = this.SISYPHUS_DOWNHILL_FRAMES.indexOf(f);
-    console.log("--> " + result);
-    return result;
-
-    var result = (this.SISYPHUS_UPHILL_FRAMES.length - 1 - (f - 51));
-
-    if (result >= this.SISYPHUS_DOWNHILL_FRAMES.length) {
-      result = this.SISYPHUS_DOWNHILL_FRAMES.length - 1;
+  handleSFX () {
+    var animName = this.tantalus.animations.currentAnim.name;
+    var currentFrame = this.getCurrentFrameNumber();
+    // if (this.state == this.STATE.REACHING && this.getCurrentFrameNumber() == 3) {
+    if (animName == "reach" && currentFrame == 3) {
+      this.attemptSFX.play();
     }
-    if (result < 0) {
-      result = 0;
+    // if (this.state == this.STATE.UNREACHING && this.getCurrentFrameNumber() == 4) {
+    if (animName == "unreach" && currentFrame == 4) {
+      this.failureSFX.play();
+    }
+    // if (this.state == this.STATE.STOOPING && this.getCurrentFrameNumber() == 9) {
+    if (animName == "stoop" && currentFrame == 9) {
+      this.failureSFX.play();
+    }
+    // if (this.state == this.STATE.UNSTOOPING && this.getCurrentFrameNumber() == 9) {
+    if (animName == "unstoop" && currentFrame == 9) {
+      this.attemptSFX.play();
+    }
+  },
+
+  handleAnimationTransitions: function () {
+    if (this.state == this.STATE.REACHING && this.tantalus.animations.currentAnim.isFinished) {
+      // console.log("REACHING>REACHLOOP")
+      this.state = this.STATE.REACHLOOP;
+      this.tantalus.animations.play("reachLoop");
+      if (this.fruitInstructionsText.visible) {
+        this.fruitInstructionsText.visible = false
+      }
+
+    }
+    else if (this.state == this.STATE.UNREACHING && this.tantalus.animations.currentAnim.isFinished) {
+      // console.log("UNREACHING>IDLE");
+      this.state = this.STATE.IDLE;
+      this.tantalus.animations.play("idle");
+    }
+    else if (this.state == this.STATE.STOOPING && this.tantalus.animations.currentAnim.isFinished) {
+      // console.log("STOOPING>STOOPLOOP");
+      this.state = this.STATE.STOOPLOOP;
+      this.tantalus.animations.play("stoopLoop");
+      if (this.waterInstructionsText.visible) {
+        this.waterInstructionsText.visible;
+      }
+    }
+    else if (this.state == this.STATE.UNSTOOPING && this.tantalus.animations.currentAnim.isFinished) {
+      // console.log("UNSTOOPING>IDLE");
+      this.state = this.STATE.IDLE;
+      this.tantalus.animations.play("idle");
+    }
+  },
+
+  handleInputAnimations: function () {
+    if (this.activated && this.input == 1) {
+      if (this.state == this.STATE.IDLE) {
+        // console.log("IDLE>REACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.REACHING;
+        this.tantalus.animations.play("reach");
+      }
+      else if (this.state == this.STATE.UNREACHING) {
+        // console.log("UNREACHING>REACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.REACHING;
+        var frame = this.unreachToReach(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('reach');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+      }
+      else if (this.state == this.STATE.STOOPING) {
+        // console.log("STOOPING>UNSTOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNSTOOPING;
+        var frame = this.stoopToUnstoop(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('unstoop');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+      }
+      else if (this.state == this.STATE.STOOPLOOP) {
+        // console.log("STOOPLOOP>UNSTOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNSTOOPING;
+        this.tantalus.animations.play("unstoop");
+      }
+    }
+    else if (this.activated && this.input == 2) {
+      if (this.state == this.STATE.IDLE) {
+        // console.log("IDLE>STOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.STOOPING;
+        this.tantalus.animations.play("stoop");
+      }
+      else if (this.state == this.STATE.UNSTOOPING) {
+        // console.log("UNSTOOPING>STOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.STOOPING;
+        var frame = this.unstoopToStoop(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('stoop');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+      }
+      else if (this.state == this.STATE.REACHING) {
+        // console.log("REACHING>UNREACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNREACHING;
+        var frame = this.reachToUnreach(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('unreach');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+      }
+      else if (this.state == this.STATE.REACHLOOP) {
+        // console.log("REACHLOOP>UNREACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNREACHING;
+        this.tantalus.animations.play("unreach");
+      }
+    }
+    else {
+      if (this.state == this.STATE.REACHING) {
+        // console.log("REACHING>UNREACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        // console.log(this.getCurrentFrameNumber());
+        this.state = this.STATE.UNREACHING;
+        var frame = this.reachToUnreach(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('unreach');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+        // console.log(">");
+        // console.log(this.tantalus.animations.currentAnim);
+      }
+      else if (this.state == this.STATE.REACHLOOP) {
+        // console.log("REACHLOOP>UNREACHING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNREACHING;
+        this.tantalus.animations.play("unreach");
+      }
+      else if (this.state == this.STATE.STOOPING) {
+        // console.log("STOOPING>UNSTOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNSTOOPING;
+        var frame = this.stoopToUnstoop(this.getCurrentFrameNumber());
+        this.tantalus.animations.play('unstoop');
+        this.tantalus.animations.currentAnim.setFrame(frame,true);
+      }
+      else if (this.state == this.STATE.STOOPLOOP) {
+        // console.log("STOOPLOOP>UNSTOOPING");
+        // console.log(this.tantalus.animations.currentAnim);
+        this.state = this.STATE.UNSTOOPING;
+        this.tantalus.animations.play("unstoop");
+      }
     }
 
-    console.log("--> " + result);
+  },
 
+  reachToUnreach: function (f) {
+    // console.log("reachToUnreach",f);
+    // console.log("UNREACH_FRAMES",this.UNREACH_FRAMES);
+    var result = this.UNREACH_FRAMES.indexOf(f);
+    // console.log("reachToUnread returning",result);
     return result;
   },
 
+  unreachToReach: function (f) {
+    var result = this.REACH_FRAMES.indexOf(f);
+    return result;
 
-  convertDownhillToUphill: function(f) {
-    return this.SISYPHUS_UPHILL_FRAMES.indexOf(f);
+  },
 
-    var result = (f - 51);
-    if (result < 0) result = 0;
-    if (result >= this.SISYPHUS_UPHILL_FRAMES.length) result = this.SISYPHUS_UPHILL_FRAMES.length - 1;
+  stoopToUnstoop: function (f) {
+    var result = this.UNSTOOP_FRAMES.indexOf(f);
     return result;
   },
 
-  getCurrentFrameNumber: function () {
-    return parseInt(this.sisyphus.animations.currentAnim.currentFrame.name.slice(18,100)) - 1;
+  unstoopToStoop(f) {
+    var result = this.STOOP_FRAMES.indexOf(f);
+    return result;
+  },
+
+  getCurrentFrameNumber: function (){
+    if (!this.tantalus.animations.currentAnim.currentFrame) {
+      // return undefined;
+    }
+    // console.log(this.tantalus.animations.currentAnim)
+    // console.log(parseInt(this.tantalus.animations.currentAnim.currentFrame.name.slice(18,100)) - 1);
+    return parseInt(this.tantalus.animations.currentAnim.currentFrame.name.slice(18,100)) - 1;
   },
 
 
   INPUT1: function () {
     this.activated = true;
+    this.input = 1;
+    this.timeSinceActived = 0;
+  },
+
+  INPUT2: function () {
+    this.activated = true;
+    this.input = 2;
     this.timeSinceActived = 0;
   },
 
@@ -242,11 +322,12 @@ BasicGame.Tantalus.prototype = {
     this.waterStatText.text = "WATER: " + this.waters;
   },
 
-  getAnimationArray: function (name, frames) {
+  getAnimationArray: function (name,frames) {
+    var newFrames = new Array(frames.lenth);
     for (var i = 0; i < frames.length; i++) {
-      frames[i] = name + (frames[i]+1) + '.png';
+      newFrames[i] = name + (frames[i]+1) + '.png';
     }
-    return frames;
+    return newFrames;
   },
 
 };
