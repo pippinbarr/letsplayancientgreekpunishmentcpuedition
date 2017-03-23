@@ -1,8 +1,14 @@
 # Things to do
 
+* Press kit
+* Preloader
+* Sound effects for menu (to emphasis choices being made)
 
-* Add 'CPU' indicator (in highlight colour) to levels
-
+* ~~Indicator for Sisyphus~~
+* ~~Indicator for Tantalus~~
+* ~~Indicator for Prometheus~~
+* ~~Indicator for Danaids~~
+* ~~Indicator for Zeno~~
 * ~~Add menu screen with CPU selection~~
 * ~~Make Sisyphus~~
 * ~~Make Tantalus~~
@@ -11,6 +17,18 @@
 * ~~Read Jesper Juul's [Zero-Player Games](https://www.jesperjuul.net/text/zeroplayergames/) because you ought to~~
 * ~~Mock-up a screenshot with a CPU player indicator on it~~
 * ~~Casually make the Prometheus version of the game~~
+
+### Updates (2017-03-23 12:28)
+
+Nothing very exciting has happened my friend. But it's that kind of game you know? All in the concept rather than the execution. Probably like most of my stuff actually, in that regard. Never all that hard to make. So I'm making away. All the versions of the game are done and the menu system exists now, so it's complete except for... the indicators.
+
+I made a couple of mockups of how the indicators would look and they looked pretty good to me, so I've decided to go ahead and put them in. They're now in for everything except Sisyphus, which involves constructing a giant table of x,y locations for every frame in that animation which: sucks. But that's the only way to do it practically, I think. Anyway it's just a task (it's a little Sisyphean except that it's totally not because it's completely finite ha ha).
+
+Anyway the point here is that the CPU indicator does help I think. In particular it starts pushing away from the idea that you're just watching an animation being played and that instead there is something "controlling" the game proper - it at least implies that. It also conveys, for people for whom the title isn't enough, the aesthetic idea that the computer is playing (whether or not it's faked).
+
+Also on the question of "faking it" by just playing an animation... it's kind of interesting in that in some sense there's no important difference? Both versions involve the computer in a 'hopeless' loop of performing work to display the imagery of, say, Sisyphus pushing a boulder up a hill. One the work of repeatedly rendering frames of a video/GIF, the other the work of repeatedly providing input into a game that renders the same frames to the screen as a result. In a sense all infinite loops are Sisyphean? In a sense computers are constantly in an Ancient Greek Hell of repeated, meaningless work? This just literalises it? Is it almost mocking of the computer? Is it contemptuous? I don't mean to be!
+
+But of course I'd still maintain there's something meaningful in the fact the computer is *playing the game* rather than *playing an animation*, the fact that there are other branches of code going unchosen/unexplored is kind of important? The classic "I could have done otherwise" despite the fact of determinism? Deep man.
 
 ### Hi Diary (2017-03-22 22:28)
 

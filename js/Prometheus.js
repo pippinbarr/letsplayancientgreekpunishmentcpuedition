@@ -70,6 +70,8 @@ BasicGame.Prometheus.prototype = {
 
     this.prometheus.animations.play('idle');
 
+    this.prometheusIndicator = this.add.sprite(this.prometheus.x + 11*SCALE,this.prometheus.y - 7*SCALE,'atlas','prometheus/prometheus_indicator.png');
+
     // ROCK (AND CHAINS)
     this.rock = this.add.sprite(0,0,'atlas');
     this.rock.animations.add('daytime',Phaser.Animation.generateFrameNames('prometheus/rock_', 1, 1, '.png'), 5, false);

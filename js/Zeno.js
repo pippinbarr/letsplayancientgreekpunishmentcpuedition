@@ -48,6 +48,8 @@ BasicGame.Zeno.prototype = {
 
     this.zeno.animations.play('idle');
 
+    this.zenoIndicator = this.add.sprite(this.zeno.x,this.zeno.y,'atlas','zeno/zeno_indicator.png');
+
     this.flag = this.add.sprite(180*SCALE,49*SCALE,'atlas','zeno/flag.png');
     scale(this.flag,SCALE);
 
@@ -166,6 +168,9 @@ BasicGame.Zeno.prototype = {
     if (this.timeSinceInput > this.MAX_INPUT_DELAY) {
       this.activated = false;
     }
+
+    this.zenoIndicator.x = this.zeno.x + 6*SCALE;
+    this.zenoIndicator.y = this.zeno.y - 7*SCALE;
 
   },
 

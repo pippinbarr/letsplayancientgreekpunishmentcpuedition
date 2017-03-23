@@ -52,6 +52,10 @@ BasicGame.Tantalus.prototype = {
 
     this.tantalus.animations.play('idle');
 
+    this.tantalusIndicator = this.add.sprite(this.tantalus.x,this.tantalus.y,'atlas','tantalus/tantalus_indicator.png');
+    this.tantalusIndicator.x = this.indicatorPositions[0].x;
+    this.tantalusIndicator.y = this.indicatorPositions[0].y;
+
 
     // SFX
     this.failureSFX = this.game.add.audio('swoopdownSFX');
@@ -121,6 +125,10 @@ BasicGame.Tantalus.prototype = {
       this.activated = false;
       this.input = 0;
     }
+
+    var frame = this.getCurrentFrameNumber();
+    this.tantalusIndicator.x = this.indicatorPositions[frame].x - this.tantalusIndicator.width + 2*8;
+    this.tantalusIndicator.y = this.indicatorPositions[frame].y - 8;
   },
 
   handleSFX () {
@@ -164,7 +172,7 @@ BasicGame.Tantalus.prototype = {
       this.state = this.STATE.STOOPLOOP;
       this.tantalus.animations.play("stoopLoop");
       if (this.waterInstructionsText.visible) {
-        this.waterInstructionsText.visible;
+        this.waterInstructionsText.visible = false;
       }
     }
     else if (this.state == this.STATE.UNSTOOPING && this.tantalus.animations.currentAnim.isFinished) {
@@ -329,6 +337,23 @@ BasicGame.Tantalus.prototype = {
     }
     return newFrames;
   },
+
+  indicatorPositions: [
+    {x: 44*8 , y: 22*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 44*8 , y: 21*8 },
+    {x: 43*8 , y: 23*8 },
+    {x: 42*8 , y: 24*8 },
+    {x: 36*8 , y: 27*8 },
+    {x: 35*8 , y: 31*8 },
+    {x: 33*8 , y: 33*8 },
+    {x: 33*8 , y: 33*8 },
+    {x: 33*8 , y: 33*8 },
+  ],
 
 };
 

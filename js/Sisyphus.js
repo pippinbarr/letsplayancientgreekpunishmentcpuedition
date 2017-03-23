@@ -42,6 +42,7 @@ BasicGame.Sisyphus.prototype = {
 
     this.sisyphus.animations.play('prestart');
 
+    this.sisyphusIndicator = this.add.sprite(this.sisyphus.x,this.sisyphus.y,'atlas','sisyphus/sisyphus_indicator.png');
 
 
     // SFX
@@ -176,6 +177,11 @@ BasicGame.Sisyphus.prototype = {
     if (this.timeSinceActived > this.MAX_ACTIVATED_DELAY) {
       this.activated = false;
     }
+
+    var frame = this.getCurrentFrameNumber();
+    this.sisyphusIndicator.x = this.indicatorPositions[frame].x - this.sisyphusIndicator.width/2;
+    this.sisyphusIndicator.y = this.indicatorPositions[frame].y - this.sisyphusIndicator.height;
+
   },
 
   convertUphillToDownhill: function(f) {
@@ -230,6 +236,105 @@ BasicGame.Sisyphus.prototype = {
     }
     return frames;
   },
+
+  indicatorPositions: [
+    {x: 10*4, y: 58*4},
+    {x: 11*4, y: 58*4},
+    {x: 13*4, y: 58*4},
+    {x: 15*4, y: 58*4},
+    {x: 16*4, y: 58*4},
+    {x: 18*4, y: 58*4},
+    {x: 20*4, y: 58*4},
+    {x: 21*4, y: 58*4},
+    {x: 23*4, y: 58*4},
+    {x: 25*4, y: 58*4},
+    {x: 26*4, y: 58*4},
+    {x: 28*4, y: 58*4},
+    {x: 30*4, y: 58*4},
+    {x: 31*4, y: 58*4},
+    {x: 33*4, y: 58*4},
+    {x: 35*4, y: 58*4},
+    {x: 36*4, y: 58*4},
+    {x: 38*4, y: 58*4},
+    {x: 40*4, y: 58*4},
+    {x: 41*4, y: 58*4},
+    {x: 43*4, y: 58*4},
+    {x: 45*4, y: 58*4},
+    {x: 46*4, y: 58*4},
+    {x: 48*4, y: 58*4},
+    {x: 50*4, y: 58*4},
+    {x: 51*4, y: 58*4},
+    {x: 53*4, y: 58*4},
+    {x: 55*4, y: 58*4},
+    {x: 56*4, y: 58*4},
+    {x: 58*4, y: 58*4},
+    {x: 60*4, y: 58*4},
+    {x: 61*4, y: 58*4},
+    {x: 63*4, y: 58*4},
+    {x: 65*4, y: 58*4},
+    {x: 66*4, y: 58*4},
+    {x: 68*4, y: 58*4},
+    {x: 70*4, y: 58*4},
+    {x: 71*4, y: 58*4},
+    {x: 73*4, y: 58*4},
+    {x: 75*4, y: 58*4},
+    {x: 76*4, y: 58*4},
+    {x: 78*4, y: 58*4},
+    {x: 80*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 81*4, y: 58*4},
+    {x: 83*4, y: 58*4},
+    {x: 85*4, y: 58*4},
+    {x: 88*4, y: 58*4},
+    {x: 90*4, y: 58*4},
+    {x: 92*4, y: 58*4},
+    {x: 93*4, y: 58*4},
+    {x: 95*4, y: 58*4},
+    {x: 97*4, y: 58*4},
+    {x: 98*4, y: 58*4},
+    {x: 100*4, y: 58*4},
+    {x: 102*4, y: 56*4},
+    {x: 103*4, y: 55*4},
+    {x: 105*4, y: 55*4},
+    {x: 106*4, y: 52*4},
+    {x: 107*4, y: 51*4},
+    {x: 109*4, y: 51*4},
+    {x: 110*4, y: 48*4},
+    {x: 111*4, y: 47*4},
+    {x: 113*4, y: 47*4},
+    {x: 114*4, y: 44*4},
+    {x: 115*4, y: 43*4},
+    {x: 117*4, y: 43*4},
+    {x: 118*4, y: 40*4},
+    {x: 119*4, y: 39*4},
+    {x: 121*4, y: 39*4},
+    {x: 122*4, y: 36*4},
+    {x: 123*4, y: 35*4},
+    {x: 125*4, y: 35*4},
+    {x: 126*4, y: 32*4},
+    {x: 127*4, y: 31*4},
+    {x: 129*4, y: 31*4},
+    {x: 130*4, y: 28*4},
+    {x: 131*4, y: 27*4},
+    {x: 133*4, y: 27*4},
+    {x: 134*4, y: 24*4},
+    {x: 135*4, y: 23*4},
+    {x: 137*4, y: 23*4},
+    {x: 138*4, y: 20*4},
+    {x: 139*4, y: 19*4},
+    {x: 141*4, y: 19*4},
+    {x: 142*4, y: 16*4},
+    {x: 143*4, y: 15*4},
+  ]
 
 };
 

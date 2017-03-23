@@ -61,6 +61,8 @@ BasicGame.Danaids.prototype = {
 
     this.danaid.animations.play('idle');
 
+    this.danaidIndicator = this.add.sprite(this.danaid.x,this.danaid.y,'atlas','danaids/danaids_indicator.png');
+
     this.bath = this.add.sprite(170*SCALE,67*SCALE,'atlas');
     this.bath.animations.add('idle',this.getAnimationArray('danaids/bath_',[1]), 5, false);
     this.bath.animations.add('pouring',this.getAnimationArray('danaids/bath_',[1,2,3]), 5, false);
@@ -181,6 +183,10 @@ BasicGame.Danaids.prototype = {
     if (this.timeSinceActivation > this.MAX_ACTIVATION_DELAY) {
       this.activated = false;
     }
+
+    this.danaidIndicator.x = this.danaid.x - 7*SCALE;
+    this.danaidIndicator.y = this.danaid.y - 9*SCALE;
+
   },
 
   fillToPour: function () {
