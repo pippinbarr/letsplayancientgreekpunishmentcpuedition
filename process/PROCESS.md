@@ -1,15 +1,20 @@
 # Things to do
 
-* Add menu screen with CPU selection
-* Add 'CPU' indicator (in highlight colour) to levels
-* Make Sisyphus
-* Make Tantalus
 
+* Add 'CPU' indicator (in highlight colour) to levels
+
+* ~~Add menu screen with CPU selection~~
+* ~~Make Sisyphus~~
+* ~~Make Tantalus~~
 * ~~Make Zeno~~
 * ~~Make Danaids~~
 * ~~Read Jesper Juul's [Zero-Player Games](https://www.jesperjuul.net/text/zeroplayergames/) because you ought to~~
 * ~~Mock-up a screenshot with a CPU player indicator on it~~
 * ~~Casually make the Prometheus version of the game~~
+
+### Hi Diary (2017-03-22 22:28)
+
+Hey just a quick note to say I now have all five of the levels working as planned which is pretty nice. Remaining key tasks are to make the menu system (where the CPU randomly selects a level to play, scrolling up and down a bit before settling on a choice), and then the consideration of having a 'CPU' indicator above the head of the characters. It would look really nice, but I think there's a big question of how practice it'd turn out to be for a lot of them... e.g. Sisyphus and Tantalus are both animated entirely in the spritesheet, which would make it hard. Prometheus is easy (he doesn't move much). Danaids and Zeno are easy because they move a sprite around rather than just an animation. But yeah, to do Tantalus and Sisyphus (Sisyphus especially) would require hard coding values for the x,y location of the indicator for every frame of animation, which for Sisyphus is over 100 frames, which sounds really unpleasant. So I'll have to think about it. It may be necessary just because it would look so lovely. Ah well.
 
 ### Dear Diary (2017-03-20 16:06)
 
