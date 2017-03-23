@@ -1,9 +1,9 @@
 # Things to do
 
 * Press kit
-* Preloader
-* Sound effects for menu (to emphasis choices being made)
 
+* ~~Preloader~~
+* ~~Sound effects for menu (to emphasis choices being made)~~
 * ~~Indicator for Sisyphus~~
 * ~~Indicator for Tantalus~~
 * ~~Indicator for Prometheus~~

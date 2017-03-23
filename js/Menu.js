@@ -39,6 +39,9 @@ BasicGame.Menu.prototype = {
 
 		this.menuItems[0].setStyle(this.menuSelectedStyle);
 
+		this.menuMoveSFX = this.game.add.audio('peckSFX');
+    this.menuChoiceSFX = this.game.add.audio('swoopupSFX');
+
 		this.time.events.add(500 + Math.random() * 2000,this.makeChoice,this);
 
 	},
@@ -63,6 +66,7 @@ BasicGame.Menu.prototype = {
 	},
 
 	menuUp: function () {
+		this.menuMoveSFX.play();
 		this.menuItems[this.selected].setStyle(this.menuItemStyle);
 		this.selected--;
 		if (this.selected < 0) this.selected = this.menuItems.length - 1;
@@ -70,6 +74,7 @@ BasicGame.Menu.prototype = {
 	},
 
 	menuDown: function () {
+		this.menuMoveSFX.play();
 		this.menuItems[this.selected].setStyle(this.menuItemStyle);
 		this.selected++;
 		if (this.selected == this.menuItems.length) this.selected = 0;
@@ -77,6 +82,7 @@ BasicGame.Menu.prototype = {
 	},
 
 	menuSelect: function () {
+		this.menuChoiceSFX.play();
 		this.state.start(this.menuItemNames[this.selected]);
 	},
 
