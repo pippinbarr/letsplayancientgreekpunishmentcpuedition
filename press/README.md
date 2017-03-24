@@ -12,11 +12,11 @@
 
 ## Description
 
-!!!
+Watch the computer struggle against the chains it put itself in! Watch the computer try to drink the water it moves out of reach! Watch the computer push a rock up a hill and knock it down again! In a joyful infinite loop! One must imagine CPU Sisyphus happy!
 
 ## History
 
-*Let's Play: Ancient Greek Punishment: CPU Edition!* ...
+*Let's Play: Ancient Greek Punishment: CPU Edition!* came about as a natural extension of my continuing series of games based on, well, ancient Greek punishments. I'd already made a reconfiguration of the game in which the human player can 'win' against the various punishments, and I've spent a fairly substantial amount of time thinking about the idea of computers the context of videogames as these simultaneously indefatigable and fragile agents, so it made sense to remake the game with that even more to the foreground. The clear answer to this was to make a version of the game that is not only represented/simulated by the computer, but is also *played* by the computer as well. There's plenty of meditation on both the metaphysics and specifics of this available in the [blogposts I've written about the game](http://www.pippinbarr.com/tag/lets-play-ancient-greek-punishment-cpu-edition?order=asc).
 
 ## Technology
 
@@ -26,7 +26,12 @@
 
 ## Features
 
-*
+* Chains and an eagle!
+* A boulder and a hill!
+* Water and an apple!
+* A bath and a bucket!
+* A nearby flag!
+* Artificial "Intelligence"
 
 ## Videos
 
