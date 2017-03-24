@@ -1,7 +1,6 @@
 # Things to do
 
-* Press kit
-
+* ~~Press kit~~
 * ~~Preloader~~
 * ~~Sound effects for menu (to emphasis choices being made)~~
 * ~~Indicator for Sisyphus~~
