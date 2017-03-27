@@ -35,9 +35,9 @@ Watch the computer struggle against the chains it put itself in! Watch the compu
 
 ## Videos
 
-### [Let's Play: Ancient Greek Punishment: CPU Edition! Trailer](https://www.youtube.com/watch?v=...)
+### [Let's Play: Ancient Greek Punishment: CPU Edition! Trailer](https://www.youtube.com/watch?v=HI55xCFFvDs)
 
-[![Let's Play: Ancient Greek Punishment: CPU Edition! Trailer](https://img.youtube.com/vi/.../0.jpg)](https://www.youtube.com/watch?v=...)
+[![Let's Play: Ancient Greek Punishment: CPU Edition! Trailer](https://img.youtube.com/vi/HI55xCFFvDs/0.jpg)](https://www.youtube.com/watch?v=HI55xCFFvDs)
 
 ## Images
 
