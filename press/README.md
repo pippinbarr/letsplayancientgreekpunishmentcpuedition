@@ -5,7 +5,7 @@
 ## The basics
 
 * Developer: [Pippin Barr](http://www.pippinbarr.com/)
-* Release: Xth of X, 2017
+* Release: 12th of April, 2017
 * Platform: Browser (mobile- and tablet-friendly)
 * Code repository: https://www.github.com/pippinbarr/letsplayancientgreekpunishmentcpuedition/
 * Price: $0.00
