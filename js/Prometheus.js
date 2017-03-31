@@ -50,8 +50,7 @@ BasicGame.Prometheus.prototype = {
 
     this.dayState = this.DAY_STATE.DAY;
 
-    this.stage.backgroundColor = '#ddaaaa';
-    // this.stage.backgroundColor = '#ff0000';
+    this.stage.backgroundColor = 0xdaaaa;
 
     // SPRITES
 
