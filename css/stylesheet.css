@@ -11,11 +11,15 @@ body {
   background: #111;
 }
 
-#game {
-  /*margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */*/
-  height: 100%;
+#gameContainer {
+  margin: 0px 0px 1px 0px; /* the extra 1px allows the iOS inner/outer check to work */
+  /*height: 100%;*/
   width: 100%;
-  min-height: 100%;
+  /*min-height: 100%;*/
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(0%, -50%);
 }
 
 #orientation {
