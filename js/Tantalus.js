@@ -79,7 +79,7 @@ BasicGame.Tantalus.prototype = {
     var fruitStatStyle = { font: FONT_SIZE_BIG + "px commodore_64_pixelizedregular", fill: "#000000", lineHeight: 2, wordWrap: true, wordWrapWidth: this.game.width - 400, align: "center"};
     var waterStatStyle = { font: FONT_SIZE_BIG + "px commodore_64_pixelizedregular", fill: "#ffffff", lineHeight: 2, wordWrap: true, wordWrapWidth: this.game.width - 400, align: "center"};
     this.fruitStatText = this.game.add.text(40*4, 5*4, 'FRUIT: 0', fruitStatStyle);
-    this.fruitStatText.angle = 32;
+    this.fruitStatText.angle = 30;
     this.waterStatText = this.game.add.text(75*4, 85*4, 'WATER: 0', waterStatStyle);
 
 
