@@ -49,10 +49,6 @@ And again.
 
 ![Prometheus](images/Prometheus.png) ![Tantalus](images/Tantalus.png) ![Danaids](images/Danaids.png) ![Sisyphus](images/Sisyphus.png) ![Zeno](images/Zeno.png)
 
-## Press
-
-* Coming soon?
-
 ## Additional Links
 
 * [Developer blog posts about *Let's Play: Ancient Greek Punishment: CPU Edition!*](http://www.pippinbarr.com/tag/lets-play-ancient-greek-punishment-cpu-edition?order=asc)
