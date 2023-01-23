@@ -28,7 +28,7 @@ BasicGame.Tantalus.prototype = {
   input: 0,
   inputChoice: 0,
   activated: false,
-  timeSinceActived: 10000,
+  timeSinceActivated: 10000,
   MAX_ACTIVATED_DELAY: 120,
 
   create: function () {
@@ -115,13 +115,13 @@ BasicGame.Tantalus.prototype = {
 
   update: function () {
 
-    this.timeSinceActived += this.time.elapsed;
+    this.timeSinceActivated += this.time.elapsed;
 
     this.handleSFX();
     this.handleAnimationTransitions();
     this.handleInputAnimations();
 
-    if (this.timeSinceActived > this.MAX_ACTIVATED_DELAY) {
+    if (this.timeSinceActivated > this.MAX_ACTIVATED_DELAY) {
       this.activated = false;
       this.input = 0;
     }
@@ -316,13 +316,13 @@ BasicGame.Tantalus.prototype = {
   INPUT1: function () {
     this.activated = true;
     this.input = 1;
-    this.timeSinceActived = 0;
+    this.timeSinceActivated = 0;
   },
 
   INPUT2: function () {
     this.activated = true;
     this.input = 2;
-    this.timeSinceActived = 0;
+    this.timeSinceActivated = 0;
   },
 
   updateTexts: function () {
